@@ -1,0 +1,3 @@
+describe("[initRoutes]", () => {
+  const app = {};
+});
