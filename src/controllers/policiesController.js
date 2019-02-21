@@ -1,12 +1,14 @@
 //Todo: test
 
-const { checkHeaders, getClientByName } = require('../utils');
+const { checkHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 const policiesData = require('../data/policies.json');
 
 exports.getListByUsername = (req, res) => {
-  // auth
-  const { username } = req.headers;
+  const { authorization, username } = req.headers;
+  const role = getUserType(authorization);
+  if (!role || role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
+
   checkHeaders(username, res);
 
   try {
@@ -24,8 +26,10 @@ exports.getListByUsername = (req, res) => {
 };
 
 exports.getListByPolicyNumber = (req, res) => {
-  //auth
-  const { policynumber } = req.headers;
+  const { authorization, policynumber } = req.headers;
+  const role = getUserType(authorization);
+  if (!role || role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
+
   checkHeaders(policynumber);
 
   try {

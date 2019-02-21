@@ -1,11 +1,13 @@
 //Todo: test
 
-const { checkHeaders, getClientByName } = require('../utils');
+const { checkHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 
 exports.getUserDataById = function getUserDataById(req, res) {
-  // auth
-  const { id } = req.headers;
+  const { authorization, id } = req.headers;
+  const role = getUserType(authorization);
+  if (!role) return res.status(401).send('You must be authenticated as admin or user.');
+
   checkHeaders(id, res);
   try {
     const result = clientsData.clients.filter((client) => client.id === id);
@@ -19,8 +21,10 @@ exports.getUserDataById = function getUserDataById(req, res) {
 };
 
 exports.getUserDataByName = function getUserDataByName(req, res) {
-  // auth
-  const { name } = req.headers;
+  const { authorization, name } = req.headers;
+  const role = getUserType(authorization);
+  if (!role) return res.status(401).send('You must be authenticated as admin or user.');
+
   checkHeaders(name, res);
   try {
     const result = getClientByName(clientsData, name);
