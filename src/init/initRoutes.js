@@ -1,7 +1,10 @@
-const express = require("express");
-const clientsController = require("../controllers/clientsController");
-const policiesController = require("../controllers/policiesController");
+const express = require('express');
+const clientsController = require('../controllers/clientsController');
+const policiesController = require('../controllers/policiesController');
 
 module.exports = function initRoutes(app) {
-  app.get("/", clientsController.get);
+  app.get('/getUserDataById', clientsController.getUserDataById);
+  app.get('/getUserDataByName', clientsController.getUserDataByName);
+  app.get('/getListByUsername', policiesController.getListByUsername);
+  app.get('/getListByPolicyNumber', policiesController.getListByPolicyNumber);
 };
