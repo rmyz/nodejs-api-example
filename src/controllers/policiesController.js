@@ -1,15 +1,16 @@
 //Todo: test
 
-const { checkHeaders, getClientByName, getUserType } = require('../utils');
+const { validateHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 const policiesData = require('../data/policies.json');
 
 exports.getListByUsername = (req, res) => {
   const { authorization, username } = req.headers;
   const role = getUserType(authorization);
-  if (!role || role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
+  if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
 
-  checkHeaders(username, res);
+  if (!validateHeaders(username))
+    return res.status(400).send(`Error: Missing username in request headers`);
 
   try {
     const client = getClientByName(clientsData, username);
@@ -28,12 +29,13 @@ exports.getListByUsername = (req, res) => {
 exports.getListByPolicyNumber = (req, res) => {
   const { authorization, policynumber } = req.headers;
   const role = getUserType(authorization);
-  if (!role || role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
+  if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
 
-  checkHeaders(policynumber);
+  if (!validateHeaders(policynumber))
+    return res.status(400).send(`Error: Missing policyNumber in request headers`);
 
   try {
-    const result = policiesData.policies.filter((policy) => policy.id === policynumber);
+    const result = policiesData.policies.find((policy) => policy.id === policynumber);
 
     if (result.length === 0)
       return res.status(404).send(`No policies found with ${policynumber} as id.`);

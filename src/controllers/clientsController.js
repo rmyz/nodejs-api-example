@@ -1,6 +1,6 @@
 //Todo: test
 
-const { checkHeaders, getClientByName, getUserType } = require('../utils');
+const { validateHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 
 exports.getUserDataById = function getUserDataById(req, res) {
@@ -8,9 +8,10 @@ exports.getUserDataById = function getUserDataById(req, res) {
   const role = getUserType(authorization);
   if (!role) return res.status(401).send('You must be authenticated as admin or user.');
 
-  checkHeaders(id, res);
+  if (!validateHeaders(id)) return res.status(400).send(`Error: Missing id in request headers`);
+
   try {
-    const result = clientsData.clients.filter((client) => client.id === id);
+    const result = clientsData.clients.find((client) => client.id === id);
 
     if (result.length === 0) return res.status(404).send(`No clients found with ${id} as id.`);
 
@@ -25,7 +26,8 @@ exports.getUserDataByName = function getUserDataByName(req, res) {
   const role = getUserType(authorization);
   if (!role) return res.status(401).send('You must be authenticated as admin or user.');
 
-  checkHeaders(name, res);
+  if (!validateHeaders(name)) return res.status(400).send(`Error: Missing name in request headers`);
+
   try {
     const result = getClientByName(clientsData, name);
 
