@@ -11,11 +11,11 @@ describe('getUserType', () => {
     expect(getUserType(authenticationHeader)).to.equal('admin');
   });
 
-  it('should return null when token does not contain role', () => {
+  it('should return undefined when token does not contain role', () => {
     expect(getUserType(authenticationHeaderWithNoRole)).to.equal(undefined);
   });
 
-  it('should return null when no authentication is passed', () => {
+  it('should return undefined when no authentication is passed', () => {
     expect(getUserType()).to.equal(undefined);
   });
 });
