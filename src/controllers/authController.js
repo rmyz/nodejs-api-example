@@ -22,7 +22,7 @@ exports.postSignUp = async (req, res) => {
   usersData.users.push({ email, password: _password });
   writeJSON(usersData);
 
-  const token = jwt.sign({ role: user.role }, APP_SECRET);
+  const token = jwt.sign({ userId: user.id, role: user.role }, APP_SECRET);
 
   return res.status(200).send(`User signed up, use the following token: ${token}`);
 };

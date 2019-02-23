@@ -2,13 +2,13 @@
 
 const fs = require('fs');
 
+const pathToUsers = `${__dirname}/../data/users.json`;
 const writeJSON = (content) => {
   try {
-    const path = `${__dirname}/../data/users.json`;
-    fs.writeFileSync(path, JSON.stringify(content), 'utf8');
+    fs.writeFileSync(pathToUsers, JSON.stringify(content), 'utf8');
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = writeJSON;
+module.exports = { writeJSON, pathToUsers };
