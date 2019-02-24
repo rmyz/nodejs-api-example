@@ -1,5 +1,3 @@
-//Todo: test
-
 const jwt = require('jsonwebtoken');
 const APP_SECRET = 'nodejs-api-test';
 

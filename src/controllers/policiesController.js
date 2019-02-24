@@ -10,7 +10,7 @@ exports.getListByUsername = (req, res) => {
   if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
 
   if (!validateHeaders(username))
-    return res.status(400).send(`Error: Missing username in request headers`);
+    return res.status(400).send(`Error: Missing username in request headers.`);
 
   try {
     const client = getClientByName(clientsData, username);
@@ -32,7 +32,7 @@ exports.getListByPolicyNumber = (req, res) => {
   if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
 
   if (!validateHeaders(policynumber))
-    return res.status(400).send(`Error: Missing policyNumber in request headers`);
+    return res.status(400).send(`Error: Missing policyNumber in request headers.`);
 
   try {
     const result = policiesData.policies.find((policy) => policy.id === policynumber);
