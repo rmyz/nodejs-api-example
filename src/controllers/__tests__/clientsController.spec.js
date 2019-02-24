@@ -1,10 +1,6 @@
-const chai = require('chai');
 const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
+const { expect } = require('chai');
 const clientsController = require('../clientsController');
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 describe('clientsController', () => {
   const req = {
