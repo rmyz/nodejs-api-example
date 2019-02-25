@@ -7,9 +7,11 @@
   "scripts": {
     "start": "node src",
     "start:dev": "nodemon -w src",
-    "test": "mocha src/**/*spec.js"
+    "test": "mocha src/**/*spec.js",
+    "documentation": "apidoc -i src -o documentation"
   },
   "dependencies": {
+    "apidoc": "^0.17.7",
     "bcryptjs": "2.4.3",
     "body-parser": "1.18.3",
     "compression": "1.7.3",

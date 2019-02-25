@@ -9,6 +9,7 @@ describe('initRoutes', () => {
   const app = {
     get: sinon.stub().returnsThis(),
     post: sinon.stub().returnsThis(),
+    use: sinon.stub().returnsThis(),
   };
 
   it('should set the functions to be called for the controllers', () => {
@@ -29,5 +30,7 @@ describe('initRoutes', () => {
     );
     expect(app.post).to.have.been.calledWith('/signup', authController.postSignUp);
     expect(app.post).to.have.been.calledWith('/login', authController.postLogin);
+    expect(app.use).to.have.been.calledWith('/documentation', sinon.match.any);
+    expect(app.get).to.have.been.calledWith('/', sinon.match.any);
   });
 });

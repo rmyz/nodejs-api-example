@@ -1,0 +1,9 @@
+{
+  "name": "NodeJS Api",
+  "version": "1.0.0",
+  "description": "A nodeJS Api",
+  "apidoc": {
+    "title": "NodeJSApi",
+    "url": "https://github.com/rmyz/nodejs-api-example"
+  }
+}
