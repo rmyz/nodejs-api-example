@@ -91,7 +91,6 @@ describe('policiesController', () => {
 
     it('should raise an error if user has no policies', async () => {
       req.headers.policynumber = 'test';
-      console.log(req.headers);
       await policiesController.getListByPolicyNumber(req, res);
 
       expect(res.status).to.have.been.calledWith(404);
