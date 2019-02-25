@@ -24,7 +24,7 @@ exports.getListByUsername = (req, res) => {
   }
 };
 
-exports.getListByPolicyNumber = (req, res) => {
+exports.getPolicyByPolicyNumber = (req, res) => {
   const { authorization, policynumber } = req.headers;
   const role = getUserType(authorization);
   if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');

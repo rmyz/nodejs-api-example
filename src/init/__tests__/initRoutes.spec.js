@@ -25,8 +25,8 @@ describe('initRoutes', () => {
       policiesController.getListByUsername,
     );
     expect(app.get).to.have.been.calledWith(
-      '/getListByPolicyNumber',
-      policiesController.getListByPolicyNumber,
+      '/getPolicyByPolicyNumber',
+      policiesController.getPolicyByPolicyNumber,
     );
     expect(app.post).to.have.been.calledWith('/signup', authController.postSignUp);
     expect(app.post).to.have.been.calledWith('/login', authController.postLogin);

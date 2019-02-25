@@ -51,7 +51,7 @@ module.exports = function initRoutes(app) {
    * @apiParam  {String}  policynumber The policy's id.
    *
    */
-  app.get('/getListByPolicyNumber', policiesController.getListByPolicyNumber);
+  app.get('/getPolicyByPolicyNumber', policiesController.getPolicyByPolicyNumber);
   /**
    * @api {post} /signup Sign up a user
    * @apiVersion 1.0.0
