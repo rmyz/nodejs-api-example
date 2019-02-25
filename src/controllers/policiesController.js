@@ -1,5 +1,3 @@
-//Todo: test
-
 const { validateHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 const policiesData = require('../data/policies.json');
@@ -17,7 +15,7 @@ exports.getListByUsername = (req, res) => {
     if (!client) return res.status(404).send(`No client found for ${username} as user name.`);
     const result = policiesData.policies.filter((policy) => policy.clientId === client.id);
 
-    if (result.length === 0)
+    if (!result || result.length === 0)
       return res.status(404).send(`No policies found for ${username} as user name.`);
 
     return res.status(200).send(result);
@@ -32,13 +30,12 @@ exports.getListByPolicyNumber = (req, res) => {
   if (role !== 'admin') return res.status(401).send('You must be authenticated as admin.');
 
   if (!validateHeaders(policynumber))
-    return res.status(400).send(`Error: Missing policyNumber in request headers.`);
+    return res.status(400).send(`Error: Missing policynumber in request headers.`);
 
   try {
     const result = policiesData.policies.find((policy) => policy.id === policynumber);
 
-    if (result.length === 0)
-      return res.status(404).send(`No policies found with ${policynumber} as id.`);
+    if (!result) return res.status(404).send(`No policies found with ${policynumber} as id.`);
 
     return res.status(200).send(result);
   } catch (error) {

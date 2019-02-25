@@ -1,5 +1,3 @@
-//Todo: test
-
 const { validateHeaders, getClientByName, getUserType } = require('../utils');
 const clientsData = require('../data/clients.json');
 

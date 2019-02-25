@@ -16,7 +16,7 @@ describe('authController', () => {
   };
 
   describe('authController - signUp', () => {
-    it('should return token for the signed up user', async () => {
+    it('should sign up the user correctly', async () => {
       await authController.postSignUp(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
